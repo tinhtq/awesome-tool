@@ -1,0 +1,53 @@
+kube-prometheus-stack:
+  alertmanager:
+    alertmanagerSpec:
+      useExistingSecret: true
+      configSecret: alertmanager-monitoring-alertmanager
+  defaultRules:
+    create: false
+  prometheus:
+    prometheusSpec:
+      serviceMonitorSelector:
+        matchLabels:
+          servicemonitor: 
+      ruleSelector:
+        matchLabels:
+          role: alertmanager-rules
+      externalLabels:
+        cluster: 
+      remoteWrite:
+        - url: 
+          basicAuth:
+            username:
+              name: remote-write
+              key: username
+            password:
+              name: remote-write
+              key: password
+          tlsConfig:
+            insecureSkipVerify: true
+    additionalRulesForClusterRole:
+      - apiGroups:
+        - security.openshift.io
+        resourceNames:
+        - privileged
+        resources:
+        - securitycontextconstraints
+        verbs:
+        - use
+  kubeApiServer:
+    enabled: false
+  coreDns:
+    enabled: false
+  kubeEtcd:
+    enabled: false
+  kubeScheduler:
+    enabled: false
+  kubeProxy:
+    enabled: false
+  kubeStateMetrics:
+    enabled: false
+  nodeExporter:
+    enabled: false
+  thanosRuler:
+    enabled: false
