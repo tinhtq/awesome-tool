@@ -13,7 +13,7 @@ spec:
   tls:
     - secretName: cert-stage-wildcard
   rules:
-    - host: traefik.drimaes.int
+    - host: traefik.int
       http:
         paths:
           - path: /

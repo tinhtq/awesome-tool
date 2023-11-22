@@ -36,7 +36,7 @@ crds:
 ## Create default rules for monitoring the cluster
 ##
 defaultRules:
-  create: true
+  create: false
   rules:
     alertmanager: true
     etcd: true
@@ -2967,8 +2967,8 @@ prometheus:
 
     # EnableFeatures API enables access to Prometheus disabled features.
     # ref: https://prometheus.io/docs/prometheus/latest/disabled_features/
-    enableFeatures: []
-    # - exemplar-storage
+    enableFeatures:
+      - remote-write-receiver
 
     ## Image of Prometheus.
     ##
@@ -3019,7 +3019,7 @@ prometheus:
 
     ## enable --web.enable-remote-write-receiver flag on prometheus-server
     ##
-    enableRemoteWriteReceiver: false
+    enableRemoteWriteReceiver: true
 
     ## Name of the external label used to denote replica name
     ##
@@ -3039,7 +3039,7 @@ prometheus:
 
     ## External URL at which Prometheus will be reachable.
     ##
-    externalUrl: ""
+    externalUrl: "${PROMETHEUS_EXTERNAL_URL}"
 
     ## Define which Nodes the Pods are scheduled on.
     ## ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -3280,7 +3280,7 @@ prometheus:
     additionalRemoteWrite: []
 
     ## Enable/Disable Grafana dashboards provisioning for prometheus remote write feature
-    remoteWriteDashboards: false
+    remoteWriteDashboards: true
 
     ## Resource limits & requests
     ##

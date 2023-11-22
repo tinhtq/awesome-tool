@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: monitor
+  labels:
+    project:
+spec:
+  endpoints:
+    - port: https-metrics
+      scheme: https
+      interval: 30s
+    - port: cadvisor
+      scheme: https
+      path: /metrics/cadvisor
+      interval: 30s
+      honorLabels: true
+  namespaceSelector:
+    matchNames:
+      - kube-system

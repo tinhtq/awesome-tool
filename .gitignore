@@ -1,3 +1,4 @@
 *.crt
 *.key
 cert.yaml
+.env
