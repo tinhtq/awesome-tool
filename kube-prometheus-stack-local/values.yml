@@ -36,7 +36,7 @@ crds:
 ## Create default rules for monitoring the cluster
 ##
 defaultRules:
-  create: false
+  create: true
   rules:
     alertmanager: true
     etcd: true
@@ -900,7 +900,13 @@ alertmanager:
 grafana:
   enabled: true
   namespaceOverride: ""
-
+  env:
+    GF_SERVER_SERVE_FROM_SUB_PATH: true
+  # use this when create a domain with path
+  grafana.ini:
+    server:
+      domain: "<external domain>"
+      root_url: "https://<domain>/<subpath>/"
   ## ForceDeployDatasources Create datasource configmap even if grafana deployment has been disabled
   ##
   forceDeployDatasources: false
@@ -2967,8 +2973,8 @@ prometheus:
 
     # EnableFeatures API enables access to Prometheus disabled features.
     # ref: https://prometheus.io/docs/prometheus/latest/disabled_features/
-    enableFeatures:
-      - remote-write-receiver
+    enableFeatures: []
+    # - exemplar-storage
 
     ## Image of Prometheus.
     ##
@@ -3039,7 +3045,7 @@ prometheus:
 
     ## External URL at which Prometheus will be reachable.
     ##
-    externalUrl: "${PROMETHEUS_EXTERNAL_URL}"
+    externalUrl: ""
 
     ## Define which Nodes the Pods are scheduled on.
     ## ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -3230,7 +3236,7 @@ prometheus:
     ## Prefix used to register routes, overriding externalUrl route.
     ## Useful for proxies that rewrite URLs.
     ##
-    routePrefix: /
+    routePrefix: /prometheus
 
     ## Standard object's metadata. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#metadata
     ## Metadata Labels and Annotations gets propagated to the prometheus pods.
@@ -3280,7 +3286,7 @@ prometheus:
     additionalRemoteWrite: []
 
     ## Enable/Disable Grafana dashboards provisioning for prometheus remote write feature
-    remoteWriteDashboards: true
+    remoteWriteDashboards: false
 
     ## Resource limits & requests
     ##
