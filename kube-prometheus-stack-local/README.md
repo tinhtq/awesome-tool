@@ -20,3 +20,11 @@ prometheus:
           - targets:
               - <IP>:<PORT>
 ```
+
+```
+count by (refer_new) (label_replace ( (count_over_time(nginxlog_resp_bytes{project="$project", referrer!~"-|http://localhost:3000/"}[5m])) ,"refer_new",
+        "$1",
+        "referrer",
+        "(https?://[^/]+).*"
+))
+```

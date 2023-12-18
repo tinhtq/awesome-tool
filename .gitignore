@@ -3,3 +3,4 @@
 cert.yaml
 .env
 local*
+*.tfvars
