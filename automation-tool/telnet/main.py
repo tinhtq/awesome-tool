@@ -4,14 +4,12 @@ import io
 
 
 async def telnet_welcome_message(host, port):
-    connection = True
+    telnet_connection = True
     try:
-        # Establish a Telnet connection with timeout
         await telnetlib3.open_connection(host, port)
-
     except (asyncio.exceptions.TimeoutError, OSError):
-        connection = False
-    return connection
+        telnet_connection = False
+    return telnet_connection
 
 
 # message = asyncio.run(telnet_welcome_message("10.0.3.183", 22))
