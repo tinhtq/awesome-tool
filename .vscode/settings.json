@@ -1,5 +1,0 @@
-{
-    "yaml.schemas": {
-        "https://json.schemastore.org/helmfile.json": "file:///Users/tinhtq/Documents/Projects/my-repo/awesome-tool/kube-prometheus-stack/template/rolebinding.yaml"
-    }
-}

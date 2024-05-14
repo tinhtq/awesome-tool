@@ -5,3 +5,4 @@ cert.yaml
 local*
 *.tfvars
 .vscode
+.idea
