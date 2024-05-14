@@ -6,3 +6,4 @@ local*
 *.tfvars
 .vscode
 .idea
+server.txt
