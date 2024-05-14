@@ -4,3 +4,4 @@ cert.yaml
 .env
 local*
 *.tfvars
+.vscode
